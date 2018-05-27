@@ -43,6 +43,8 @@ with open ("/Users/yukornienko/Downloads/seq_y_pestis.fasta") as fasta:
         seq_len = len(seq)
         kmer_size = 23
         kmer_dict = {}
+#сохраняем текущую хромосому
+        chrom = record.name
         
         for index in range(seq_len-kmer_size+1): #создаем словарь кмеров с числом их встречания в последовательности
             current_kmer = seq[index:(index+kmer_size)]
@@ -52,10 +54,10 @@ with open ("/Users/yukornienko/Downloads/seq_y_pestis.fasta") as fasta:
                 kmer_dict[current_kmer] = kmer(current_kmer)
                 
         most_freq_kmer_seq= max(kmer_dict.keys(), key=(lambda key: kmer_dict[key].counter)) #самый частый кмер
-      
         #самый частый кмер - вывод его последовательности, числа раз встречания и координат
         
-        print(most_freq_kmer_seq)
+        #вывод вместе с хромосомой
+        print(chrom, most_freq_kmer_seq)
         print(kmer_dict[most_freq_kmer_seq].counter)
         
         most_freq_kmer = kmer(most_freq_kmer_seq)
